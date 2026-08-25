@@ -8,7 +8,7 @@ USE SCHEMA APP;
 CREATE OR REPLACE NOTIFICATION INTEGRATION aws_malaysia_semiconductor_supply_chain_EMAIL_INT
   TYPE = EMAIL
   ENABLED = TRUE
-  ALLOWED_RECIPIENTS = ('jonathan.asvestis@snowflake.com');
+  ALLOWED_RECIPIENTS = ('<YOUR_EMAIL>');
 
 -- Alert: SUPPLIER_HIGH_RISK_ALERT
 CREATE OR REPLACE ALERT APP.SUPPLIER_HIGH_RISK_ALERT
@@ -22,7 +22,7 @@ IF (EXISTS (
 THEN
   CALL SYSTEM$SEND_EMAIL(
     'aws_malaysia_semiconductor_supply_chain_EMAIL_INT',
-    'jonathan.asvestis@snowflake.com',
+    '<YOUR_EMAIL>',
     '[ALERT] Semiconductor Supply Chain Visibility: Supplier risk score exceeds critical threshold',
     'Supplier risk score exceeds critical threshold'
   );
@@ -41,7 +41,7 @@ IF (EXISTS (
 THEN
   CALL SYSTEM$SEND_EMAIL(
     'aws_malaysia_semiconductor_supply_chain_EMAIL_INT',
-    'jonathan.asvestis@snowflake.com',
+    '<YOUR_EMAIL>',
     '[ALERT] Semiconductor Supply Chain Visibility: Purchase order lead time deviation exceeds 14 days',
     'Purchase order lead time deviation exceeds 14 days'
   );
