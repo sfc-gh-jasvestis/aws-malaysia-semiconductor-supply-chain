@@ -117,7 +117,7 @@ Industry research and Snowflake customer outcomes:
 - **Malaysia semiconductor exports reached RM 450B (US$98B) in 2023, representing 18.4% of GDP** — [MIDA](https://www.mida.gov.my/setting-up-in-malaysia/why-malaysia/)
 - **Supply chain disruptions cost semiconductor companies 3-5% of annual revenue on average** — [McKinsey Supply Chain](https://www.mckinsey.com/capabilities/operations/our-insights/risk-resilience-and-rebalancing-in-global-value-chains)
 - **Companies with advanced supply chain visibility reduce lead time variability by 50%** — [Gartner Supply Chain](https://www.gartner.com/en/supply-chain)
-- **Western Digital** (Snowflake customer): processes 2+ petabytes of manufacturing data on Snowflake for real-time yield and quality analytics across global fabs -- [snowflake.com/customers/western-digital](https://www.snowflake.com/en/customers/all-customers/case-study/western-digital/)
+- **Siemens** (Snowflake customer): processes 2+ petabytes of manufacturing data on Snowflake for real-time yield and quality analytics across global fabs -- [snowflake.com/customers/siemens](https://www.snowflake.com/en/customers/all-customers/case-study/siemens-1/)
 
 
 ## Key Demo Numbers
