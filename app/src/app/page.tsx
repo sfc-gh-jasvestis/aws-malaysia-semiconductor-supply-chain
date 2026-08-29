@@ -74,7 +74,7 @@ export default function HomePage() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Chart data={data?.breakdown || [{ label: 'A', value: 30 }, { label: 'B', value: 70 }]} type="pie" xKey="label" yKeys={[{ key: 'value', name: 'RM K/unit' }]} title="Component Cost Trend" />
-        <ActionMemo persona={{ name: 'Dato' Azman Ibrahim', role: 'VP Supply Chain' }} context={{}} onGenerate={async () => ({ subject: 'Action Required', body: 'AI-generated recommendation based on current data.', urgency: 'HIGH', actions: ['Expedite photoresist shipment (2 days supply left)', 'Qualify backup rare gas supplier', 'Negotiate long-term silicon wafer agreement'] })} />
+        <ActionMemo persona={{ name: 'Dato Azman Ibrahim', role: 'VP Supply Chain' }} context={{}} onGenerate={async () => ({ subject: 'Action Required', body: 'AI-generated recommendation based on current data.', urgency: 'HIGH', actions: ['Expedite photoresist shipment (2 days supply left)', 'Qualify backup rare gas supplier', 'Negotiate long-term silicon wafer agreement'] })} />
       </div>
     </div>
   );
