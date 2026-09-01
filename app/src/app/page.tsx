@@ -32,15 +32,23 @@ export default function HomePage() {
       .catch(() => {});
   }, []);
 
+
+  // Look up a KPI value returned by /api/data (sourced from CURATED.KPI_SUMMARY).
+  // Falls back to the original literal so the card still renders if the API,
+  // or KPI_SUMMARY, is unavailable.
+  const kpiVal = (title: string, fallback: string): string =>
+    (data?.kpiCards as { title: string; value: string }[] | undefined)
+      ?.find((k) => k.title === title)?.value ?? fallback;
+
   const title = narrative?.title || 'SEA AWS Demo';
 
   const executiveCockpit = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <KPICard title="On-Time Delivery" value="94%" status="warning" />
-        <KPICard title="Component Shortage" value="8 SKUs" status="danger" />
-        <KPICard title="Lead Time (Avg)" value="6.2 weeks" status="neutral" />
-        <KPICard title="Active Suppliers" value="124" status="neutral" />
+        <KPICard title="On-Time Delivery" value={kpiVal('On-Time Delivery', '94%')} status="warning" />
+        <KPICard title="Component Shortage" value={kpiVal('Component Shortage', '8 SKUs')} status="danger" />
+        <KPICard title="Lead Time (Avg)" value={kpiVal('Lead Time (Avg)', '6.2 weeks')} status="neutral" />
+        <KPICard title="Active Suppliers" value={kpiVal('Active Suppliers', '124')} status="neutral" />
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="lg:col-span-1">
@@ -63,9 +71,9 @@ export default function HomePage() {
   const domainTab1 = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <KPICard title="Single-Source Risk" value="RM 42M" />
-        <KPICard title="Buffer Stock" value="8 days" />
-        <KPICard title="Alternatives" value="84%" />
+        <KPICard title="Single-Source Risk" value={kpiVal('Single-Source Risk', 'RM 42M')} />
+        <KPICard title="Buffer Stock" value={kpiVal('Buffer Stock', '8 days')} />
+        <KPICard title="Alternatives" value={kpiVal('Alternatives', '84%')} />
       </div>
       <Chart data={data?.detail || [{ x: 'Mon', y: 24 }, { x: 'Tue', y: 28 }, { x: 'Wed', y: 22 }, { x: 'Thu', y: 31 }, { x: 'Fri', y: 26 }, { x: 'Sat', y: 19 }, { x: 'Sun', y: 23 }]} type="area" xKey="x" yKeys={[{ key: 'y', name: 'Risk Score' }]} title="Supply Risk Assessment" height={400} />
     </div>
