@@ -1,16 +1,13 @@
--- ============================================================================
--- Semiconductor Supply Chain Visibility
--- Multi-tier BOM tracking across 50 suppliers for Malaysia's semiconductor corridor — Snowflake Dynamic Tables build real-time supply graphs while Iceberg enables partner access via Athena.
--- ============================================================================
-USE ROLE ACCOUNTADMIN;
-CREATE DATABASE IF NOT EXISTS SEMICONDUCTOR_SUPPLY_CHAIN;
-CREATE WAREHOUSE IF NOT EXISTS SEMI_WH WAREHOUSE_SIZE = 'MEDIUM' AUTO_SUSPEND = 120 AUTO_RESUME = TRUE;
-USE DATABASE SEMICONDUCTOR_SUPPLY_CHAIN;
-CREATE SCHEMA IF NOT EXISTS RAW;
-CREATE SCHEMA IF NOT EXISTS CURATED;
-CREATE SCHEMA IF NOT EXISTS ML;
-CREATE SCHEMA IF NOT EXISTS AI;
-CREATE SCHEMA IF NOT EXISTS SEARCH;
-CREATE SCHEMA IF NOT EXISTS APP;
+-- Generated from generator/demo_specs/aws-malaysia-semiconductor-supply-chain.json
+-- Regenerate with: python3 generator/gen_repo_docs.py aws-malaysia-semiconductor-supply-chain
+-- This is the schema that is actually deployed for MY_SEMICONDUCTOR_SUPPLY_CHAIN.
 
-USE WAREHOUSE SEMI_WH;
+-- MY_SEMICONDUCTOR_SUPPLY_CHAIN  (Semiconductor Supply Chain Visibility)
+-- generated from generator/demo_specs/aws-malaysia-semiconductor-supply-chain.json - do not hand-edit
+CREATE DATABASE IF NOT EXISTS MY_SEMICONDUCTOR_SUPPLY_CHAIN;
+CREATE SCHEMA IF NOT EXISTS MY_SEMICONDUCTOR_SUPPLY_CHAIN.RAW;
+CREATE SCHEMA IF NOT EXISTS MY_SEMICONDUCTOR_SUPPLY_CHAIN.CURATED;
+CREATE SCHEMA IF NOT EXISTS MY_SEMICONDUCTOR_SUPPLY_CHAIN.APP;
+USE DATABASE MY_SEMICONDUCTOR_SUPPLY_CHAIN;
+
+-- 5 real regions; entity names carry their region so the two always agree
