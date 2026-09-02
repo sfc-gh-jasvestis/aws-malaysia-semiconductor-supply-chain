@@ -1,109 +1,82 @@
-# Demo Script: Semiconductor Supply Chain Visibility
-## ~4-Minute Recorded Walkthrough
-**Format**: Screen recording with voiceover
-**Target**: Customer meeting / booth loop / social share
-**Narrative**: "Snowflake builds the supply chain graph natively — every BOM level, supplier risk, and lead time tracked in Dynamic Tables, exported as Iceberg for partner self-service"
-**Demo Mode**: Open app with `?demo=true` for presenter notes
+# Semiconductor Supply Chain Visibility
 
----
+**Malaysia - Semiconductor & Electronics Manufacturing**
+Use case: Supply Chain Visibility
 
-## Two Personas
+> Multi-tier BOM tracking across 50 suppliers for Malaysia's semiconductor corridor — Snowflake Dynamic Tables build real-time supply graphs while Iceberg enables partner access via Athena.
 
-| Persona | Role | Tool | What they care about |
-|---|---|---|---|
-| **Lim Chee Keong** | Chief Supply Chain Officer | React App (SPCS) | Supply continuity, supplier risk concentration, lead time variance, BOM cost escalation |
-| **Siti Nurhaliza binti Ahmad** | Procurement Manager | Amazon QuickSight | Purchase order lead times, supplier delivery performance, BOM cost variance, alternative sourcing |
+## Why Snowflake
 
----
+Snowflake builds the supply chain graph natively — every BOM level, supplier risk, and lead time tracked in Dynamic Tables, exported as Iceberg for partner self-service
 
-## What's Built
+- **Multi-tier BOM graph in Dynamic Tables** - Only demo building recursive supply chain graphs natively in Snowflake SQL
+- **Iceberg export for partner Athena access** - Demonstrates open data sharing without copying — partners self-serve via their own tools
+- **ML.FORECAST for lead time prediction** - Predicts supplier delivery delays before they impact production scheduling
+- **ML.ANOMALY_DETECTION for supply disruption** - Detects unusual supplier delivery patterns as early warning of disruption
+- **60 supplier documents searchable via Cortex Search** - Contracts, audits, and compliance certs instantly queryable for risk assessment
+- **Malaysian semiconductor supply chain context** - RM 890M procurement with realistic ASEAN supplier names and trade routes
 
-| Layer | Component | Detail |
+## What is deployed
+
+| | |
+|---|---|
+| Database | `MY_SEMICONDUCTOR_SUPPLY_CHAIN` |
+| Service | `MY_SEMICONDUCTOR_SUPPLY_CHAIN_APP` |
+| Compute pool | `SEA_DEMOS_MALAYSIA_POOL` |
+| Dimension table | `RAW.ASEAN_TRADE` (20 rows) |
+| Fact table | `RAW.PURCHASE_ORDERS` (250,000 rows, 90 days) |
+| Curated layer | `CURATED.PERFORMANCE_SUMMARY`, `CURATED.TREND_ANALYSIS`, `CURATED.KPI_SUMMARY` |
+| Currency | MYR (RM) |
+
+Regions in play: Selangor, Johor, Penang, Sabah, Sarawak
+Segments: Substrate, Leadframe, Bonding Wire, Mold Compound
+
+Dynamic tables are created suspended and refreshed on demand:
+
+```bash
+./refresh_demo_data.sh MY_SEMICONDUCTOR_SUPPLY_CHAIN
+```
+
+## KPI cards
+
+Every card below is served live from `CURATED.KPI_SUMMARY`. The app keeps the
+original literal as a fallback, so it still renders if Snowflake is unreachable.
+
+| Card | Value | Backed by |
 |---|---|---|
-| **RAW** | 6 tables | SUPPLIERS (50), BOM_ITEMS (2000), PURCHASE_ORDERS (10000), SHIPMENTS (5000), SUPPLIER_DOCS (60), ASEAN_TRADE (12) |
-| **CURATED** | 4 Dynamic Tables | SUPPLIER_RISK_SCORE, BOM_COST_ROLLUP, LEAD_TIME_ANALYTICS, SUPPLY_GRAPH |
-| **ML** | ML.FORECAST + ML.ANOMALY_DETECTION | Forecasting + anomaly detection |
-| **AI** | COMPLETE, AI_CLASSIFY, SUMMARIZE | Classification + extraction |
-| **Search** | Cortex Search | 60 documents indexed |
-| **Agent** | SUPPLY_CHAIN_INTELLIGENCE_AGENT | Semantic View + Search tools |
+| On-Time Delivery | `94%` | average per event |
+| Component Shortage | `8 SKUs` | average per event |
+| Lead Time (Avg) | `6.2 weeks` | average per event |
+| Active Suppliers | `124` | total across Asean Trade |
+| Single-Source Risk | `RM 42M` | total across Asean Trade |
+| Buffer Stock | `8 days` | average per event |
+| Alternatives | `84%` | average per event |
 
 
----
+## Demo flow
 
-## The Story
+1. Supply Chain Overview
+2. BOM Analytics
+3. Predictive Intelligence
+4. Ask AI
+5. Architecture & Data
 
-Malaysia's semiconductor corridor relies on 50+ tier-1 suppliers spanning ASEAN and East Asia. A single supplier disruption can cascade through multi-level BOMs, halting production lines within days. With RM 890M in annual procurement and 12-day average lead time deviations, the CSCO needs real-time visibility into supplier risk, not monthly spreadsheet reviews.
+## Talking points
 
----
+- **50 tier-1 suppliers** - tracked across ASEAN and East Asia
+- **3 suppliers** - flagged HIGH RISK (delivery + financial + concentration)
+- **RM 890M** - annual procurement spend (US$205M)
+- **12-day average** - lead time deviation across all suppliers
+- **60 supplier docs** - indexed and searchable via Cortex Search
+- **7 components** - single-source dependency (no qualified alternative)
 
-## Script
+## Business impact
 
-### [0:00–0:45] SUPPLY CHAIN OVERVIEW
-
-**Show**: Supply Chain Overview tab
-
-> "RM 890 million in annual procurement across 50 tier-1 suppliers in the Penang-Kulim semiconductor corridor."
-
-**Action**: Point at RM 890M procurement KPI
-
-### [0:45–1:30] BOM ANALYTICS
-
-**Show**: BOM Analytics tab
-
-> "2,000 BOM items tracked across 5 product families — multi-level parent-child relationships."
-
-**Action**: Show BOM tree visualization
-
-### [1:30–2:15] PREDICTIVE INTELLIGENCE
-
-**Show**: Predictive Intelligence tab
-
-> "ML.FORECAST predicts lead time for each supplier 30 days forward — two suppliers trending toward SLA breach."
-
-**Action**: Show lead time forecast chart with confidence bands
-
-### [2:15–3:00] ASK AI
-
-**Show**: Ask AI tab
-
-> "Lim Chee Keong asks: 'Which suppliers have the highest risk of disruption next quarter?'"
-
-**Action**: Type: 'Which suppliers are at highest risk next quarter?'
-
-### [3:00–3:45] ARCHITECTURE & DATA
-
-**Show**: Architecture & Data tab
-
-> "Six Snowflake capabilities, six AWS services — Iceberg as the interoperability layer."
-
-**Action**: Walk through architecture diagram
-
+- Malaysia semiconductor exports reached RM 450B (US$98B) in 2023, representing 18.4% of GDP (MIDA)
+- Supply chain disruptions cost semiconductor companies 3-5% of annual revenue on average (McKinsey Supply Chain)
+- Companies with advanced supply chain visibility reduce lead time variability by 50% (Gartner Supply Chain)
+- Honeywell achieved real-time supply chain intelligence on Snowflake (Snowflake Customers)
 
 ---
-
-## Key Demo Differentiators
-
-1. **Multi-tier BOM graph in Dynamic Tables** — Only demo building recursive supply chain graphs natively in Snowflake SQL
-2. **Iceberg export for partner Athena access** — Demonstrates open data sharing without copying — partners self-serve via their own tools
-3. **ML.FORECAST for lead time prediction** — Predicts supplier delivery delays before they impact production scheduling
-4. **ML.ANOMALY_DETECTION for supply disruption** — Detects unusual supplier delivery patterns as early warning of disruption
-5. **60 supplier documents searchable via Cortex Search** — Contracts, audits, and compliance certs instantly queryable for risk assessment
-6. **Malaysian semiconductor supply chain context** — RM 890M procurement with realistic ASEAN supplier names and trade routes
-
-
----
-
-## Demo Prep Checklist
-
-### Data Verification
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_SUPPLY_CHAIN.RAW.SUPPLIERS` → 50
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_SUPPLY_CHAIN.RAW.BOM_ITEMS` → 2000
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_SUPPLY_CHAIN.RAW.PURCHASE_ORDERS` → 10000
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_SUPPLY_CHAIN.CURATED.SUPPLIER_RISK_SCORE WHERE RISK_LEVEL = 'HIGH'` → 3
-
-### ML Model Verification
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_SUPPLY_CHAIN.ML.LEAD_TIME_FORECAST_RESULTS` → >0
-
-### AI/Agent Verification
-- [ ] `SELECT COUNT(*) FROM SEMICONDUCTOR_SUPPLY_CHAIN.AI.DOC_CLASSIFICATION` → 60
-
+Generated from `generator/demo_specs/aws-malaysia-semiconductor-supply-chain.json`. Do not hand-edit: run
+`python3 generator/gen_repo_docs.py aws-malaysia-semiconductor-supply-chain` instead.
