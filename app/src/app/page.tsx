@@ -53,6 +53,7 @@ export default function HomePage() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="lg:col-span-1">
           <GeoMap country="malaysia"
+            labels={{ entity: 'Suppliers', event: 'Purchase Orders', alert: 'Shortages' }}
             regions={data?.regions} markers={[{"label": "Penang", "value": "Fab: util 92%", "color": "green", "size": "lg"}, {"label": "Kuala Lumpur", "value": "HQ", "color": "blue", "size": "md"}, {"label": "Johor Bahru", "value": "Southern ops", "color": "green", "size": "md"}]} routes={[]} title="Geographic Overview" height={400} />
         </div>
         <div className="lg:col-span-1 grid grid-cols-1 gap-4">
@@ -63,9 +64,14 @@ export default function HomePage() {
       <DataTable columns={[
           { key: 'id', header: 'Rank' },
           { key: 'name', header: 'Supplier' },
+          { key: 'region', header: 'Region' },
           { key: 'status', header: 'Status' },
-          { key: 'value', header: 'OTD %' },
-      ]} data={data?.entities || []} title="Supplier Performance" />
+          { key: 'm1', header: 'OTD %' },
+          { key: 'm2', header: 'Component Shortage' },
+          { key: 'm3', header: 'Lead Time' },
+          { key: 'events', header: 'Purchase Orders' },
+          { key: 'alerts', header: 'Shortages' },
+        ]} data={data?.entities || []} title="Supplier Performance" />
     </div>
   );
 
